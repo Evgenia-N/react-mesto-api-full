@@ -16,9 +16,17 @@ const app = express();
 app.use(cors({
   origin: ['https://evgex.nomoredomains.work', 'http://evgex.nomoredomains.work'],
   credentials: true,
+  allowedHeaders:
+  'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+  methods: 'GET, POST, PUT, PATCH, DELETE',
 }));
 app.use(cookieParser());
 app.use(requestLogger);
+app.get('/crash-test', () => {
+  setTimeout(() => {
+    throw new Error('Сервер сейчас упадёт');
+  }, 0);
+});
 app.use(userRoutes);
 app.use(cardRoutes);
 app.use('*', auth, (req, res, next) => {
