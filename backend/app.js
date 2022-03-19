@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
-// const cors = require('cors');
+const cors = require('cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorHandler = require('./middlewares/error-handler');
 const userRoutes = require('./routes/users');
@@ -53,10 +53,10 @@ app.use((req, res, next) => {
 //  }),
 // );
 
-// app.use(cors({
-//  origin: ['https://evgex.nomoredomains.work', 'http://evgex.nomoredomains.work'],
-//  credentials: true,
-// ));
+app.use(cors({
+  origin: allowedCors,
+  credentials: true,
+}));
 app.use(cookieParser());
 app.use(requestLogger);
 app.get('/crash-test', () => {
