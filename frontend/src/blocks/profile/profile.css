@@ -1,0 +1,15 @@
+.profile {
+  display: grid;
+  grid-template-columns: minmax(min-content, max-content) 2fr 1fr;
+  align-items: center;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+}
+
+@media (max-width: 980px) {
+  .profile {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+

@@ -1,0 +1,20 @@
+.profile__pic-edit-button {
+  background-image: url(../../../images/edit-profile-pic.svg);
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0, 0, 0.8);
+  background-position: 50%;
+  background-size: 26px;
+  border-radius: 50%;
+  height: 120px;
+  width: 120px;
+  position: absolute;
+  padding: 0;
+  border: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+.profile__pic-edit-button:hover {
+cursor: pointer;
+opacity: 1;
+}

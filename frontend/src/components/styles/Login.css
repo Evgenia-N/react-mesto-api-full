@@ -1,0 +1,86 @@
+@font-face {
+  font-family: 'Inter';
+  font-style:  normal;
+  font-weight: 400;
+  src: url('../../vendor/fonts/inter-regular.woff2') format("woff2"),
+       url('../../vendor/fonts/inter-regular.woff') format("woff");
+}
+
+@font-face {
+  font-family: 'Inter';
+  font-style:  normal;
+  font-weight: 500;
+  src: url('../../vendor/fonts/inter-medium.woff2') format("woff2"),
+       url('../../vendor/fonts/inter-medium.woff') format("woff");
+}
+
+@font-face {      
+  font-family: 'Inter';
+  font-style:  normal;
+  font-weight: 900;
+  src: url('../../vendor/fonts/inter-black.woff2') format("woff2"),
+       url('../../vendor/fonts/inter-black.woff') format("woff");
+}
+
+.login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  font-family: 'Inter';
+}
+
+.login__enter {
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 29px;
+  text-align: center;
+  color: #fff;
+  margin: 20px 0;
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+  width: 358px;
+}
+
+.login__input {
+  background-color: #000;
+  border: none;
+  border-bottom: 1px  solid #ccc;
+  margin-top: 30px;
+  height: 27px;
+  color: #ccc;
+}
+
+.login__link {
+  background-image: url("../../images/login-button.svg");
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 358px;
+  height: 50px;
+  border-radius: 2px;
+  margin: 216px 0 112px;
+  cursor: pointer;
+}
+
+.login__link:hover {
+  opacity: .85;
+  transition: opacity .1s ease;
+}
+
+@media (max-width: 400px) {
+  .login__enter {
+    font-size: 20px;
+  }
+  .login__form {
+    width: 260px;
+  }
+  .login__link {
+    width: 260px;
+    height: 46px;
+    margin-top: 173px;
+  }
+}

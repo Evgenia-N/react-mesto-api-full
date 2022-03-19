@@ -1,0 +1,16 @@
+.header__menu {
+  background-image: url('../../../images/menu.svg');
+  visibility: hidden;
+  width: 24px;
+  height: 24px;
+  background-color: #000;
+  border: none;
+  background-repeat: repeat-x;
+  margin-top: 7px;
+}
+
+@media (max-width: 652px) {
+  .header__menu {
+    visibility: visible;
+  }
+}

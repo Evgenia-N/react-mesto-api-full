@@ -1,0 +1,4 @@
+.elements__photo-container {
+  max-height: 282px;
+  overflow: hidden;
+}

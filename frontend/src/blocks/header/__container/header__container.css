@@ -1,0 +1,12 @@
+.header__container {
+  display: flex;
+  margin-top: 6px;
+}
+
+@media (max-width: 652px) {
+  .header__container {
+    flex-direction: column;
+    align-items: flex-start;
+    display: none;
+  }
+}
