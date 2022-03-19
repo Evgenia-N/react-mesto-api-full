@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://api.evgex.nomoredomains.work';
+export const BASE_URL = 'http://localhost:3001';
 
 function checkResponse(res) {
   if (res.ok) {
@@ -34,3 +34,17 @@ export const authorize = (email, password) => {
   .then(checkResponse)
   .then (data => data)
 }; 
+
+export const checkToken = () => {
+  return fetch(`${BASE_URL}/users/me`, {
+    method: 'GET',
+    credentials: 'include',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      //'Authorization': `Bearer ${token}`,
+    }
+  })
+  .then(checkResponse)
+  .then (data => data)
+}

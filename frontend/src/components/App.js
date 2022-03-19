@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route, Navigate, useNavigate, } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate, useLocation } from 'react-router-dom';
 import Api from '../utils/Api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Header from './Header';
@@ -19,6 +19,7 @@ export default function App() {
   const [loggedIn, setLoggedin] = React.useState(false);
   const [userData, setUserData] = React.useState('');
   const navigate = useNavigate();
+  const location = useLocation();
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
@@ -53,6 +54,7 @@ export default function App() {
       if (!email || !password) {
         return;
       }
+      localStorage.setItem('token', data.jwt);
       setLoggedin(true);
       setUserData({ email });
       navigate("/");
@@ -64,7 +66,27 @@ export default function App() {
     })
   }
 
+  const handleTokenCheck = (path) => {
+    if (localStorage.getItem('token')) {
+      auth.checkToken(localStorage.getItem('token')).then((res) => {
+        if(res) {
+          setLoggedin(true);
+          navigate(path);
+          setUserData({email: res.email})
+        }
+      })
+      .catch((err) => { 
+        console.log(`${err}`) 
+      }) 
+    }
+  };
+
+  React.useEffect(() => {
+    handleTokenCheck(location.pathname);
+  }, []);
+
   const handleLogout = () => {
+    localStorage.removeItem('token');
     setUserData('');
     setLoggedin(false);
     navigate('/sign-in')
