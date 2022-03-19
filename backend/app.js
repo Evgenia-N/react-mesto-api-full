@@ -14,11 +14,8 @@ const NotFoundError = require('./errors/NotFoundError');
 const { PORT = 3001 } = process.env;
 const app = express();
 app.use(cors({
-  origin: ['https://evgex.nomoredomains.work', 'http://evgex.nomoredomains.work', 'localhost:3000'],
+  origin: ['https://evgex.nomoredomains.work', 'http://evgex.nomoredomains.work'],
   credentials: true,
-  allowedHeaders:
-  'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-  methods: 'GET, POST, PUT, PATCH, DELETE',
 }));
 app.use(cookieParser());
 app.use(requestLogger);
