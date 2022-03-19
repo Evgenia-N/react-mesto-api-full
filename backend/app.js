@@ -3,7 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const { errors } = require('celebrate');
-const cors = require('cors');
+// const cors = require('cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
 const errorHandler = require('./middlewares/error-handler');
 const userRoutes = require('./routes/users');
@@ -16,24 +16,42 @@ const app = express();
 const allowedCors = [
   'https://evgex.nomoredomains.work',
   'http://evgex.nomoredomains.work',
-  'localhost:3000',
+  'http://localhost:3000',
 ];
 
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (allowedCors.indexOf(origin) !== -1) {
-        callback(null, true);
-      } else {
-        callback(new Error('Ошибка CORS'));
-      }
-    },
-    credentials: true,
-    allowedHeaders:
-      'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-    methods: 'GET, POST, PUT, PATCH, DELETE',
-  }),
-);
+app.use((req, res, next) => {
+  const { origin } = req.headers;
+  if (allowedCors.includes(origin)) {
+    res.header('Access-Control-Allow-Origin', origin);
+    res.header('Access-Control-Allow-Credentials', true);
+    const { method } = req;
+    const DEFAULT_ALLOWED_METHODS = 'GET,PUT,PATCH,POST,DELETE';
+    if (method === 'OPTIONS') {
+      res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
+    }
+    const requestHeaders = req.headers['access-control-request-headers'];
+    if (method === 'OPTIONS') {
+      res.header('Access-Control-Allow-Headers', requestHeaders);
+    }
+  }
+  next();
+});
+
+// app.use(
+//  cors({
+//    origin: (origin, callback) => {
+//      if (allowedCors.indexOf(origin) !== -1) {
+//        callback(null, true);
+//      } else {
+//        callback(new Error('Ошибка CORS'));
+//      }
+//    },
+//    credentials: true,
+//    allowedHeaders:
+//      'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+//   methods: 'GET, POST, PUT, PATCH, DELETE',
+//  }),
+// );
 
 // app.use(cors({
 //  origin: ['https://evgex.nomoredomains.work', 'http://evgex.nomoredomains.work'],
