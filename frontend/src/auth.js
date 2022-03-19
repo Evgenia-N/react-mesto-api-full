@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://evgex.nomoredomains.work';
+export const BASE_URL = 'https:/api.evgex.nomoredomains.work';
 
 function checkResponse(res) {
   if (res.ok) {
