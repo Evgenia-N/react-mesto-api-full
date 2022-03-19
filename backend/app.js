@@ -13,8 +13,8 @@ const NotFoundError = require('./errors/NotFoundError');
 
 const { PORT = 3001 } = process.env;
 const app = express();
-app.use(cookieParser());
-const allowedCors = [
+
+const allowedDomains = [
   'https://evgex.nomoredomains.work',
   'http://evgex.nomoredomains.work',
   'http://localhost:3000',
@@ -22,43 +22,21 @@ const allowedCors = [
 
 app.use((req, res, next) => {
   const { origin } = req.headers;
-  if (allowedCors.includes(origin)) {
-    res.header('Access-Control-Allow-Origin', origin);
+  if (allowedDomains.includes(origin)) {
     res.header('Access-Control-Allow-Credentials', true);
+    res.header('Access-Control-Allow-Origin', origin);
     const { method } = req;
     const DEFAULT_ALLOWED_METHODS = 'GET,PUT,PATCH,POST,DELETE';
     if (method === 'OPTIONS') {
+      const requestHeaders = req.headers['access-control-request-headers'];
       res.header('Access-Control-Allow-Methods', DEFAULT_ALLOWED_METHODS);
-    }
-    const requestHeaders = req.headers['access-control-request-headers'];
-    if (method === 'OPTIONS') {
       res.header('Access-Control-Allow-Headers', requestHeaders);
     }
   }
   next();
 });
 
-// app.use(
-//  cors({
-//    origin: (origin, callback) => {
-//      if (allowedCors.indexOf(origin) !== -1) {
-//        callback(null, true);
-//      } else {
-//        callback(new Error('Ошибка CORS'));
-//      }
-//    },
-//    credentials: true,
-//    allowedHeaders:
-//      'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-//   methods: 'GET, POST, PUT, PATCH, DELETE',
-//  }),
-// );
-
-// app.use(cors({
-//  origin: ['https://evgex.nomoredomains.work', 'http://evgex.nomoredomains.work'],
-//  credentials: true,
-// ));
-
+app.use(cookieParser());
 app.use(requestLogger);
 app.get('/crash-test', () => {
   setTimeout(() => {

@@ -98,7 +98,6 @@ class Api {
 export default new Api ({
   url: 'https://api.evgex.nomoredomains.work',
   headers: { 
-    // authorization: '8449e18b-a7ee-40b0-b102-1a72c02d892b',
     'content-type': "application/json"
   }
 })

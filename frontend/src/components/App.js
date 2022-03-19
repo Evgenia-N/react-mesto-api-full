@@ -19,7 +19,6 @@ export default function App() {
   const [loggedIn, setLoggedin] = React.useState(false);
   const [userData, setUserData] = React.useState('');
   const navigate = useNavigate();
-  // const location = useLocation();
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
@@ -54,14 +53,9 @@ export default function App() {
       if (!email || !password) {
         return;
       }
-      // localStorage.setItem("token", data.token);
       setLoggedin(true);
-      // auth.checkToken(localStorage.getItem("token")).then((res) => {
-      //   if (res) {
       setUserData({ email });
-       // }
       navigate("/");
-      //});
     })
     .catch((err) => {
       setisInfoTooltipOpen(true)
@@ -71,30 +65,10 @@ export default function App() {
   }
 
   const handleLogout = () => {
-  //  localStorage.removeItem('token');
     setUserData('');
     setLoggedin(false);
     navigate('/sign-in')
   }
-
-//  const handleTokenCheck = (path) => {
-//    if (localStorage.getItem('token')) {
- //     auth.checkToken(localStorage.getItem('token')).then((res) => {
-  //      if(res) {
-   //       setLoggedin(true);
- //         navigate(path);
- //         setUserData({email: res.email})
- //       }
-  //    })
-  //    .catch((err) => { 
-  //      console.log(`${err}`) 
-  //    }) 
-  //  }
- // };
-
-  //React.useEffect(() => {
-  //  handleTokenCheck(location.pathname);
-  //}, []);
 
   React.useEffect(() => {
     if (loggedIn) {
