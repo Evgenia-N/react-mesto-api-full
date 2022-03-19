@@ -13,10 +13,32 @@ const NotFoundError = require('./errors/NotFoundError');
 
 const { PORT = 3001 } = process.env;
 const app = express();
-app.use(cors({
-  origin: ['https://evgex.nomoredomains.work', 'http://evgex.nomoredomains.work'],
-  credentials: true,
-}));
+const allowedCors = [
+  'https://evgex.nomoredomains.work',
+  'http://evgex.nomoredomains.work',
+  'localhost:3000',
+];
+
+app.use(
+  cors({
+    origin: (origin, callback) => {
+      if (allowedCors.indexOf(origin) !== -1) {
+        callback(null, true);
+      } else {
+        callback(new Error('Ошибка CORS'));
+      }
+    },
+    credentials: true,
+    allowedHeaders:
+      'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+    methods: 'GET, POST, PUT, PATCH, DELETE',
+  }),
+);
+
+// app.use(cors({
+//  origin: ['https://evgex.nomoredomains.work', 'http://evgex.nomoredomains.work'],
+//  credentials: true,
+// ));
 app.use(cookieParser());
 app.use(requestLogger);
 app.get('/crash-test', () => {
