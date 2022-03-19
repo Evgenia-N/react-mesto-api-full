@@ -14,7 +14,7 @@ const NotFoundError = require('./errors/NotFoundError');
 const { PORT = 3001 } = process.env;
 const app = express();
 app.use(cors({
-  origin: ['https://evgex.nomoredomains.work', 'http://evgex.nomoredomains.work'],
+  origin: ['https://evgex.nomoredomains.work', 'http://evgex.nomoredomains.work', 'localhost:3000'],
   credentials: true,
   allowedHeaders:
   'Origin, X-Requested-With, Content-Type, Accept, Authorization',
