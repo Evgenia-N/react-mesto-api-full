@@ -54,7 +54,8 @@ export default function App() {
       if (!email || !password) {
         return;
       }
-      localStorage.setItem('token', data.id);
+      localStorage.setItem('token', data._id);
+      console.log(data);
       setLoggedin(true);
       setUserData({ email });
       navigate("/");

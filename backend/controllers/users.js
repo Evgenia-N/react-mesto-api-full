@@ -95,7 +95,7 @@ exports.login = (req, res, next) => {
             httpOnly: true,
             sameSite: true,
           });
-          return res.status(200).send({ message: `С возвращением, ${user.name}!`, jwt: token, id: user._id });
+          return res.status(200).send({ message: `С возвращением, ${user.name}!`, jwt: token, _id: user._id });
         })
         .catch((err) => {
           next(new UnAuthorisedError(err.message));

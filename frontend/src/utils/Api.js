@@ -96,7 +96,7 @@ class Api {
 } 
 
 export default new Api ({
-  url: 'https://api.evgex.nomoredomains.work',
+  url: 'http://localhost:3001',
   headers: { 
     'content-type': "application/json"
   }
